@@ -1,0 +1,132 @@
+import com.google.protobuf.gradle.builtins
+import com.google.protobuf.gradle.generateProtoTasks
+import com.google.protobuf.gradle.protobuf
+import com.google.protobuf.gradle.protoc
+
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-kapt")
+//    id("com.google.gms.google-services")
+//    id("com.google.firebase.crashlytics")
+    id("com.google.protobuf")
+    id("dagger.hilt.android.plugin")
+}
+
+android {
+    compileSdk = AppConfig.compileSdkVersion
+    buildToolsVersion = AppConfig.buildToolsVersion
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    defaultConfig {
+        applicationId = AppConfig.packageName
+        minSdk = AppConfig.minSdkVersion
+        targetSdk = AppConfig.targetSdkVersion
+        versionCode = AppConfig.versionCode
+        versionName = AppConfig.versionName
+        testInstrumentationRunner = AppConfig.testInstrumentationRunner
+        multiDexEnabled = true
+        //Change your API url here
+        buildConfigField("String", "BaseUrl", "\"https://localhost.com/api/\"")
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            keyAlias = AppSigningConfig.keyAlias
+            keyPassword = AppSigningConfig.keyPassword
+            storeFile = file(AppSigningConfig.storeFile)
+            storePassword = AppSigningConfig.storePassword
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = AppConfig.sourceCompatibility
+        targetCompatibility = AppConfig.targetCompatibility
+    }
+
+    kotlinOptions {
+        jvmTarget = AppConfig.jvmTarget
+    }
+}
+
+dependencies {
+    api(Libs.kotlin)
+    api(Libs.coroutineCore)
+    api(Libs.coroutineAndroid)
+
+    api(Libs.multidex)
+    api(Libs.lifecycleExtension)
+    api(Libs.appCompat)
+    api(Libs.androidCore)
+    api(Libs.constraintLayout)
+    api(Libs.recyclerView)
+    api(Libs.materialDesign)
+
+    api(Libs.navigationUi)
+    api(Libs.navigationFragment)
+
+    testApi(Libs.junit)
+    androidTestApi(Libs.junitExt)
+    androidTestApi(Libs.expressoCore)
+
+    api(Libs.timber)
+    api(Libs.securityCrypto)
+    api(Libs.preference)
+//    api(Libs.analytics)
+
+    // Networking
+    api(Libs.okHttp)
+    api(Libs.loggingInterceptor)
+    api(Libs.retrofit)
+    api(Libs.gsonConverter)
+    api(Libs.scalarConverter)
+
+    // Coil
+    api(Libs.coil)
+    api(Libs.coilVideo)
+
+    // Room Database
+    api(Libs.room)
+    api(Libs.roomRuntime)
+    kapt(Libs.roomCompiler)
+    testApi(Libs.roomTesting)
+
+    // Datastore
+    api(Libs.dataStore)
+    api(Libs.preferenceDataStore)
+    api(Libs.javaLite)
+
+    implementation(Libs.hiltAndroid)
+    kapt(Libs.hiltCompiler)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.18.0"
+    }
+
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") { option("lite") }
+            }
+        }
+    }
+}
