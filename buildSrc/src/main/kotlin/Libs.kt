@@ -13,6 +13,9 @@ object Libs {
     const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
     const val materialDesign = "com.google.android.material:material:1.5.0"
 
+    //sdp
+    const val spd = "com.intuit.sdp:sdp-android:1.1.0"
+
     // Test
     const val junit = "junit:junit:4.13.2"
     const val junitExt = "androidx.test.ext:junit:1.1.3"
