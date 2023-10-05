@@ -57,4 +57,11 @@ object Libs {
     // Hilt
     const val hiltAndroid = "com.google.dagger:hilt-android:2.38.1"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
+
+    //cpp
+    const val cpp = "com.hbb20:ccp:2.7.0"
+
+    //OTP
+    const val OTP = "com.github.mukeshsolanki.android-otpview-pinview:otpview:3.2.0"
+
 }

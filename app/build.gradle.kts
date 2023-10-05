@@ -120,6 +120,9 @@ dependencies {
 
     implementation(Libs.hiltAndroid)
     kapt(Libs.hiltCompiler)
+
+    implementation(Libs.cpp)
+    implementation("com.github.KevinSchildhorn:OTPView:0.2.5")
 }
 
 protobuf {
