@@ -2,3 +2,8 @@ Endpoint
 database-1.cyqsxvtvvbpd.us-east-1.rds.amazonaws.com
 Port
 5432
+
+Username
+postgres
+password
+Callitchef
