@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.chefio.ui.home.homepage.HomeFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/SearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SearchFragment"
+        android:name="com.chefio.ui.home.search.SearchFragment"
+        android:label="Leaderboard"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/ChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ChatFragment"
+        android:name="com.chefio.ui.home.chat.ChatFragment"
+        android:label="Store"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_thirdFragment_to_fourthFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.chefio.ui.home.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
