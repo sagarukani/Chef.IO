@@ -122,6 +122,7 @@ dependencies {
     kapt(Libs.hiltCompiler)
 
     implementation(Libs.cpp)
+    implementation(Libs.imageView)
     implementation("com.github.KevinSchildhorn:OTPView:0.2.5")
 }
 

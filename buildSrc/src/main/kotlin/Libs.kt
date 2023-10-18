@@ -64,4 +64,7 @@ object Libs {
     //OTP
     const val OTP = "com.github.mukeshsolanki.android-otpview-pinview:otpview:3.2.0"
 
+    //Round corner layout
+    const val imageView = "com.makeramen:roundedimageview:2.3.0"
+
 }
