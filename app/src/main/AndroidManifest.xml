@@ -14,14 +14,17 @@
         android:theme="@style/Theme.Chef.IO"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.support.SupportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.thankyou.ThankYouActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.resetPassword.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.detailedRegistration.cusines.SelectCuisinesActivity"
             android:exported="false" />
@@ -36,15 +39,19 @@
             android:exported="false" />
         <activity
             android:name=".ui.otpVerification.VerifyOTPActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true" />
