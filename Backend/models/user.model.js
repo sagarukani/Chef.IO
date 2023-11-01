@@ -22,11 +22,8 @@ module.exports = (sequelize, Sequelize) =>{
         mobilenumber: {
             type: Sequelize.INTEGER
         },
-        usertype: {
-            type: Sequelize.ENUM('user', 'chef')
-        },
         gender:{
-            type: Sequelize.STRING
+            type: Sequelize.ENUM
         },
         addressid:{
             type: Sequelize.INTEGER

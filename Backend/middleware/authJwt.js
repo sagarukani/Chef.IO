@@ -25,12 +25,6 @@ verifyToken = (req, res, next) => {
             });
 };
 
-isNormalUser = (req, res, next) => {
-    User.findByPk(req.userId).then(user =>{
-        user.get
-    })
-}
-
 isAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
@@ -53,14 +47,14 @@ isModerator = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "chef") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!"
+        message: "Require Chef Role!"
       });
     });
   });
@@ -70,7 +64,7 @@ isModeratorOrAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (roles[i].name === "chef") {
           next();
           return;
         }

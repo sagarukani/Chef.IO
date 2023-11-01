@@ -1,9 +1,6 @@
 module.exports = (sequelize, Sequelize) =>{
 
     const Chef = sequelize.define("chef", {
-        userid: {
-            type: Sequelize.INTEGER
-        },
         cuisines: {
             type: Sequelize.STRING
         },
@@ -11,6 +8,9 @@ module.exports = (sequelize, Sequelize) =>{
             type: Sequelize.STRING
         },
         scheduleid: {
+            type: Sequelize.INTEGER
+        },
+        userid: {
             type: Sequelize.INTEGER
         }
 
