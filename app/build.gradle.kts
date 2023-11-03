@@ -123,6 +123,7 @@ dependencies {
 
     implementation(Libs.cpp)
     implementation(Libs.imageView)
+    implementation(Libs.rating)
     implementation("com.github.KevinSchildhorn:OTPView:0.2.5")
 }
 

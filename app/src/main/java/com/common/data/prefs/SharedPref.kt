@@ -22,6 +22,14 @@ class SharedPref(context: Context, private val gson: Gson) : EncryptedPreference
         get() = getString(this::authToken.name)
         set(value) = setString(this::authToken.name, value)
 
+    var isLoggedIn : Boolean
+        get() = getBoolean(this::isLoggedIn.name,false)
+        set(value) = setBoolean(this::isLoggedIn.name,value)
+
+    var isUser : Boolean
+        get() = getBoolean(this::isUser.name,false)
+        set(value) = setBoolean(this::isUser.name,value)
+
 
     var userInfo: UserInfo?
         set(value) = setString(this::userInfo.name, toJson(value))

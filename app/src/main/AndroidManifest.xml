@@ -14,6 +14,21 @@
         android:theme="@style/Theme.Chef.IO"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.orderDetails.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.feedback.FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.orderHistory.OrderHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.editProfile.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.support.SupportActivity"
             android:exported="false" />
         <activity
@@ -32,11 +47,11 @@
             android:name=".ui.forgotPassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detailedRegistration.ChefRegistration"
+            android:name=".ui.detailedRegistration.ChefRegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detailedRegistration.UserRegistration"
-            android:exported="false" />
+            android:name=".ui.detailedRegistration.UserRegistrationActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.otpVerification.VerifyOTPActivity"
             android:exported="true" />
@@ -45,6 +60,9 @@
             android:exported="true" />
         <activity
             android:name=".ui.login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,9 +70,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="true" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />

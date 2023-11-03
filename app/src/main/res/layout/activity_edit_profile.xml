@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.editProfile.EditProfileActivity">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCustomerSupport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="@string/edit_profile"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintStart_toEndOf="@id/ivBack"
+            app:layout_constraintTop_toTopOf="@id/ivBack" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:src="@drawable/profile_demo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/_10sdp" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@id/btnRegister"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/ivProfile">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -24,12 +58,12 @@
                     android:id="@+id/tvSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_18sdp"
                     android:text="@string/register_new_account"
-                    android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18sdp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etFirstName"
@@ -39,8 +73,8 @@
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_first_name"
-                    android:paddingStart="@dimen/_12sdp"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
                     android:textSize="@dimen/_12sdp" />
@@ -49,11 +83,11 @@
                     android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:maxLines="1"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_last_name"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -63,19 +97,19 @@
                     android:id="@+id/etBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:maxLines="1"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:clickable="true"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="start|center_vertical"
                     android:hint="@string/enter_birthdate"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
-                    android:gravity="start|center_vertical"
                     android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp"
-                    android:focusable="true" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <RelativeLayout
                     android:id="@+id/rlSpinner"
@@ -111,8 +145,8 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
-                    android:maxLines="1"
                     android:hint="@string/enter_address_line_1"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -122,11 +156,11 @@
                     android:id="@+id/etLineTwo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:maxLines="1"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_address_line_2"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -138,9 +172,9 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:maxLines="1"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_zip_code"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -152,9 +186,9 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:maxLines="1"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_city"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -167,8 +201,8 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
-                    android:maxLines="1"
                     android:hint="@string/enter_province"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
                     android:textColorHint="@color/light_red"
@@ -182,9 +216,9 @@
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/round_corner_boarder"
                     android:hint="@string/enter_country"
+                    android:maxLines="1"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
-                    android:maxLines="1"
                     android:textColorHint="@color/light_red"
                     android:textSize="@dimen/_12sdp" />
 
@@ -209,9 +243,9 @@
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
-                        android:rotation="270"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:rotation="270"
                         android:src="@drawable/icon_arrow_down" />
 
                 </RelativeLayout>
@@ -228,7 +262,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:background="@drawable/round_corner_button_red_boarder"
-            android:text="@string/verify"
+            android:text="@string/update"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"

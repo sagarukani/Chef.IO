@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.chefio.R
 import com.chefio.databinding.ActivitySplashBinding
+import com.chefio.ui.home.HomeActivity
+import com.chefio.ui.login.LoginActivity
 import com.chefio.ui.main.MainActivity
 import com.common.base.BaseActivity
 
@@ -27,8 +29,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun setRunnable() {
         mRunnable = Runnable {
-            startActivity(Intent(this,MainActivity::class.java))
-            finish()
+            if (pref.isLoggedIn){
+                startActivity(Intent(this,HomeActivity::class.java))
+                finish()
+            }else{
+                startActivity(Intent(this,LoginActivity::class.java))
+                finish()
+            }
         }
     }
 }

@@ -67,4 +67,7 @@ object Libs {
     //Round corner layout
     const val imageView = "com.makeramen:roundedimageview:2.3.0"
 
+    //rating bar
+    const val rating = "com.github.ome450901:SimpleRatingBar:1.5.1"
+
 }

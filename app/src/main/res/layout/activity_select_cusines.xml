@@ -23,16 +23,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rlCuisine"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSelectCuisine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btnSelect"
+            android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_item_cuisines"
+            app:layout_constraintBottom_toTopOf="@id/btnSelect"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="0dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSelectCuisine"
+            tools:listitem="@layout/list_item_cuisines" />
 
         <Button
             android:id="@+id/btnSelect"
