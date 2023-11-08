@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) =>{
             type: Sequelize.INTEGER
         },
         gender:{
-            type: Sequelize.ENUM
+            type: Sequelize.ENUM("1","2")
         },
         addressid:{
             type: Sequelize.INTEGER

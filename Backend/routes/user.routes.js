@@ -24,6 +24,7 @@ module.exports = function(app) {
         controller.chefBoard
     );
 
+    app.post("/api/user/address", controller.address);
     app.get(
         "/api/test/admin",
         [authJwt.verifyToken, authJwt.isAdmin],

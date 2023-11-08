@@ -44,9 +44,7 @@ const sequelize = new Sequelize(
     through: "user_type"
   });
   db.user.hasMany(db.cuisine, {as:"cuisines"});
-  db.cuisine.belongsTo(db.user, {
-    foreignKey: "userid", as: "user",
-  });
+  db.cuisine.belongsTo(db.user);
   // db.chef.belongsTo(db.user);
 
   db.ROLES = ["user", "chef", "admin"];
