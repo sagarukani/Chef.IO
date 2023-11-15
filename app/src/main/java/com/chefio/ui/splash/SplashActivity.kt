@@ -1,13 +1,11 @@
 package com.chefio.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.chefio.R
 import com.chefio.databinding.ActivitySplashBinding
 import com.chefio.ui.home.HomeActivity
 import com.chefio.ui.login.LoginActivity
-import com.chefio.ui.main.MainActivity
 import com.common.base.BaseActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -28,8 +26,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun setRunnable() {
+
+        pref.isLoggedIn = false
         mRunnable = Runnable {
-            if (pref.isLoggedIn){
+            if (/*pref.isLoggedIn*/true){
                 startActivity(Intent(this,HomeActivity::class.java))
                 finish()
             }else{

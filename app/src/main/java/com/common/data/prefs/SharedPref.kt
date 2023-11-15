@@ -26,7 +26,7 @@ class SharedPref(context: Context, private val gson: Gson) : EncryptedPreference
         get() = getBoolean(this::isLoggedIn.name,false)
         set(value) = setBoolean(this::isLoggedIn.name,value)
 
-    var isUser : Boolean
+    var isUser : Boolean // true = user,false = chef
         get() = getBoolean(this::isUser.name,false)
         set(value) = setBoolean(this::isUser.name,value)
 
