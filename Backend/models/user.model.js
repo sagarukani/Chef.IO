@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) =>{
 
     const User = sequelize.define("users", {
-        // username: {
-        //     type: Sequelize.STRING
-        // },
+        username: {
+            type: Sequelize.STRING
+        },
         firstname: {
             type: Sequelize.STRING
         },
@@ -25,9 +25,9 @@ module.exports = (sequelize, Sequelize) =>{
         gender:{
             type: Sequelize.ENUM("1","2")
         },
-        // addressid:{
-        //     type: Sequelize.STRING
-        // }
+        addressid:{
+            type: Sequelize.STRING
+        }
 
     });
     

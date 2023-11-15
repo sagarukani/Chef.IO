@@ -25,14 +25,13 @@ const sequelize = new Sequelize(
   db.chef = require("./chef.model")(sequelize, Sequelize);
   db.user = require("./user.model")(sequelize, Sequelize);
   db.role = require("./role.model")(sequelize, Sequelize);
-
   db.post = require("./post.model")(sequelize, Sequelize);
   db.schedule = require("./schedule.model")(sequelize, Sequelize);
   db.payment = require("./payment.model")(sequelize, Sequelize);
   db.feedback = require("./feedback.model")(sequelize, Sequelize);
   db.booking = require("./booking.model")(sequelize, Sequelize);
   db.address = require("./address.model")(sequelize, Sequelize);
-  db.cuisine = require("./cuisine.model")(sequelize, Sequelize);
+  // db.cuisine = require("./cuisine.model")(sequelize, Sequelize);
   //
   // db.user.hasOne(db.address);
   // db.address.belongsTo(db.user);
@@ -43,11 +42,11 @@ const sequelize = new Sequelize(
   db.role.belongsToMany(db.user,{
     through: "user_type"
   });
-  db.user.hasMany(db.cuisine, {as:"cuisines"});
-  db.cuisine.belongsTo(db.user);
+  // db.user.hasMany(db.cuisine, {as:"cuisines"});
+  // db.cuisine.belongsTo(db.user);
   // db.chef.belongsTo(db.user);
 
   db.ROLES = ["user", "chef", "admin"];
-  db.cuisine = ["African", "American", "Mexican", "Thai", "Greek", "Indian", "Japanese", "Spanish", "French", "Chinese", "Italian" ];
+  // db.cuisine = ["African", "American", "Mexican", "Thai", "Greek", "Indian", "Japanese", "Spanish", "French", "Chinese", "Italian" ];
 
   module.exports = db;

@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) =>{
 
     const Chef = sequelize.define("chef", {
-        cuisines: {
+        cuisine: {
             type: Sequelize.STRING
         },
         preferedcities: {
