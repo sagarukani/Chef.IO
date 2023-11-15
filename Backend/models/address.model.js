@@ -18,10 +18,10 @@ module.exports = (sequelize, Sequelize) =>{
         },
         country: {
             type: Sequelize.STRING
+        },
+        userid: {
+            type: Sequelize.INTEGER
         }
-        // userid: {
-        //     type: Sequelize.INTEGER
-        // }
         
         
 

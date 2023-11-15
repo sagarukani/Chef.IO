@@ -7,6 +7,21 @@ module.exports = (sequelize, Sequelize) =>{
         preferedcities: {
             type: Sequelize.STRING
         },
+        intro:{
+            type: Sequelize.STRING
+        },
+        facebooklink:{
+            type:Sequelize.STRING
+        },
+        instagramlink:{
+            type:Sequelize.STRING
+        },
+        youtubelink:{
+            type:Sequelize.STRING
+        },
+        Xlink:{
+            type:Sequelize.STRING
+        },
         scheduleid: {
             type: Sequelize.INTEGER
         },

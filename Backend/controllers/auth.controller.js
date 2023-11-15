@@ -41,17 +41,6 @@ exports.signup = (req, res) => {
         });
 };
 
-// exports.address = (req, res) =>{
-//     User.findByPk(req.userid, {
-//         where: {userid: req.userid}
-//     }).then(User.update(
-//         firstname: req.body.firstname,
-//         lastname: req.body.lastname,
-//         mobilenumber: req.body.mobilenumber,
-//         gender: req.body.gender
-//     ))
-// }
-
 exports.signin = (req, res) => {
     User.findOne({
         where: {

@@ -5,25 +5,25 @@ module.exports = (sequelize, Sequelize) =>{
             type: Sequelize.INTEGER
         },
         sundayatime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         mondaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         tuesdaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         wednesdaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         thursdaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         fridaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         },
         saturdaytime: {
-            type: Sequelize.DATE
+            type: Sequelize.STRING
         }
 
     });

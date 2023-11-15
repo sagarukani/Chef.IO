@@ -33,9 +33,9 @@ const sequelize = new Sequelize(
   db.booking = require("./booking.model")(sequelize, Sequelize);
   db.address = require("./address.model")(sequelize, Sequelize);
   db.cuisine = require("./cuisine.model")(sequelize, Sequelize);
-
-  db.user.hasOne(db.address);
-  db.address.belongsTo(db.user);
+  //
+  // db.user.hasOne(db.address);
+  // db.address.belongsTo(db.user);
 
   db.user.belongsToMany(db.role,{
     through: "user_type"
@@ -48,4 +48,6 @@ const sequelize = new Sequelize(
   // db.chef.belongsTo(db.user);
 
   db.ROLES = ["user", "chef", "admin"];
+  db.cuisine = ["African", "American", "Mexican", "Thai", "Greek", "Indian", "Japanese", "Spanish", "French", "Chinese", "Italian" ];
+
   module.exports = db;
