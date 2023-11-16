@@ -6,7 +6,45 @@ const Config = require("../config/auth.config");
 const jwt = require('jsonwebtoken');
 const {where} = require("sequelize");
 
+exports.createschedule = (req, res) =>{
+    let token = req.headers["x-access-token"];
 
+    let s = Config.secret;
+    let userID;
+    try{
+        const decode = jwt.verify(token, s);
+        // console.log(decode);
+        userID = decode.id;
+    }catch (err){
+        console.error('JWT')
+    }
+    let chef = Chef.findOne({
+        where: {userid: userID}
+    });
+    Schedule.create({
+        chef: chef.id,
+        sundayatime: req.body.sundayatime,
+        mondaytime: req.body.mondaytime,
+        tuesdaytime: req.body.tuesdaytime,
+        wednesdaytime: req.body.wednesdaytime,
+        thursdaytime: req.body.thursdaytime,
+        fridaytime: req.body.fridaytime,
+        saturdaytime: req.body.saturdaytime
+    }).then(()=>{
+        res.send({message: "schedule Created"});
+    });
+};
+exports.getschedulebyid = (req, res) =>{
+    let id = req.params.id;
+
+    let profile = Chef.findOne({
+        where: {id: id}
+    });
+    let schedule = Schedule.findOne({
+        where: {chefid: profile.id}
+    });
+    res.send(schedule);
+}
 
 exports.scheduleUpdate = (req, res) => {
     let token = req.headers["x-access-token"];
