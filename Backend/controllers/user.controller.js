@@ -19,34 +19,40 @@ exports.adminBoard = (req, res) => {
 exports.chefBoard = (req, res) => {
     res.status(200).send("Chef Content.");
 };
-exports.address = (req, res) => {
+exports.address = async (req, res) => {
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
         console.error('JWT')
     }
     try {
-        uploadFile(req, res);
+
+        await uploadFile(req, res);
 
         if (req.file === undefined) {
-            return res.status(400).send({ message: "Please upload a file!" });
+            return res.status(400).send({message: "Please upload a file!"});
         }
 
         res.status(200).send({
             message: "Uploaded the file successfully: " + req.file.originalname,
         });
     } catch (err) {
+        if (err.code == "LIMIT_FILE_SIZE") {
+            return res.status(500).send({
+                message: "File size cannot be larger than 2MB!",
+            });
+        }
         res.status(500).send({
             message: `Could not upload the file: ${req.file.originalname}. ${err}`,
         });
     }
-   Address.create({
+    Address.create({
         street1: req.body.street1,
         street2: req.body.street2,
         city: req.body.city,
@@ -54,23 +60,24 @@ exports.address = (req, res) => {
         postalcode: req.body.postalcode,
         country: req.body.country,
         userid: userID
-    }).then( () =>{
-    let address = Address.findOne({
-        where: {userid: userID}
-    })
-    User.update({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            gender: req.body.gender,
-            mobilenumber: req.body.mobilenumber,
-            profilepicture: req.file.originalname,
-            addressid: address.id},
-        {
-            where: {id: userID}
-        }).then(() =>{
-            
-        res.send({message: "User data updated"});
+    }).then(() => {
+        let address = Address.findOne({
+            where: {userid: userID}
+        })
+        User.update({
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                gender: req.body.gender,
+                mobilenumber: req.body.mobilenumber,
+                profilepicture: req.file.originalname,
+                addressid: address.id
+            },
+            {
+                where: {id: userID}
+            }).then(() => {
+
+            res.send({message: "User data updated"});
+        });
     });
-   });
 };
 

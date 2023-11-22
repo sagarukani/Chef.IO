@@ -36,9 +36,11 @@ exports.createschedule = (req, res) =>{
 };
 exports.getschedulebyid = (req, res) =>{
     let id = req.params.id;
-
-    let profile = Chef.findOne({
+    let user = User.findOne({
         where: {id: id}
+    });
+    let profile = Chef.findOne({
+        where: {userid: user.id}
     });
     let schedule = Schedule.findOne({
         where: {chefid: profile.id}
@@ -91,7 +93,7 @@ exports.getschedule = (req, res) =>{
         where: {userid: userID}
     });
     let schedule = Schedule.findOne({
-        where: {chefid : chef.id}
+        where: {chefid: chef.id}
     });
     res.send(schedule);
 };
