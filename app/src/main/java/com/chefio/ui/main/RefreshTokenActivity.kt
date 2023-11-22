@@ -3,12 +3,11 @@ package com.chefio.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import com.common.base.BaseActivity
-import com.common.data.network.model.request.ReqLogin
 import com.chefio.R
 import com.chefio.databinding.ActivityRefreshTokenBinding
+import com.common.base.BaseActivity
+import com.common.data.network.model.request.ReqLogin
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class RefreshTokenActivity :
@@ -34,8 +33,8 @@ class RefreshTokenActivity :
         viewModel.loginError.observe(this) { it.printStackTrace() }
 
         viewModel.login.observe(this) {
-            Timber.d("$it")
-            pref.authToken = it.authToken
+//            Timber.d("$it")
+//            pref.authToken = it.authToken
         }
     }
 
@@ -48,7 +47,7 @@ class RefreshTokenActivity :
         when (view?.id) {
             R.id.btnLogin -> {
                 val reqLogin = ReqLogin("new@mail.com", "123")
-                viewModel.login(reqLogin)
+//                viewModel.login(reqLogin)
             }
             R.id.btnDummy -> {
                 viewModel.dummy()

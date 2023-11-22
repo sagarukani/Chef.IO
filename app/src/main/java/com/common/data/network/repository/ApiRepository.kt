@@ -6,7 +6,11 @@ import com.common.data.ApiSuccess
 import com.common.data.network.api.IApiService1
 import com.common.data.network.api.IApiService2
 import com.common.data.network.model.ResponseCode
-import com.common.data.network.model.request.ReqLogin
+import com.common.data.network.model.request.AddressReqModel
+import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.request.LoginRequestModel
+import com.common.data.network.model.request.ScheduleReqModel
+import com.common.data.network.model.request.SignupReqModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -21,9 +25,17 @@ class ApiRepository(
     private val apiService2: IApiService2,
 ) {
 
-    suspend fun getUsers() = callApi { apiService1.getUsers() }
+    suspend fun login(reqLogin: LoginRequestModel) = callApi { apiService1.login(reqLogin) }
+    suspend fun signup(reqLogin: SignupReqModel) = callApi { apiService1.signup(reqLogin) }
+    suspend fun address(reqLogin: AddressReqModel) = callApi { apiService1.address(reqLogin) }
+    suspend fun editProfile(reqLogin: ArrayList<EditProfileReqModelItem>) =
+        callApi { apiService1.editProfile(reqLogin) }
 
-    suspend fun login(reqLogin: ReqLogin) = callApi { apiService2.login(reqLogin) }
+    suspend fun scheduleCreate(reqLogin: ArrayList<ScheduleReqModel>) =
+        callApi { apiService1.scheduleCreate(reqLogin) }
+
+    suspend fun getownschedule() =
+        callApi { apiService1.getownschedule() }
 
     suspend fun dummy() = callApi { apiService2.dummy() }
 

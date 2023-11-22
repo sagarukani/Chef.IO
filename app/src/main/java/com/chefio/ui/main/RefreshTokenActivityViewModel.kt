@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.base.BaseViewModel
 import com.common.base.SingleLiveEvent
-import com.common.data.network.model.ResponseUser
-import com.common.data.network.model.request.ReqLogin
+import com.common.data.network.model.LoginResponse
+import com.common.data.network.model.request.LoginRequestModel
 import com.common.data.network.repository.ApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,12 +17,12 @@ import javax.inject.Inject
 class RefreshTokenActivityViewModel @Inject constructor(
     private val apiRepository: ApiRepository
 ) : BaseViewModel() {
-    private val _login = SingleLiveEvent<ResponseUser>()
-    val login: LiveData<ResponseUser> = _login
+    private val _login = SingleLiveEvent<LoginResponse>()
+    val login: LiveData<LoginResponse> = _login
     private val _loginError = MutableLiveData<Throwable>()
     val loginError: LiveData<Throwable> = _loginError
 
-    fun login(reqLogin: ReqLogin) {
+    fun login(reqLogin: LoginRequestModel) {
         viewModelScope.launch {
             displayLoader()
             processDataEvent(apiRepository.login(reqLogin), onError = {

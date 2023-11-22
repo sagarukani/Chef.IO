@@ -1,11 +1,11 @@
 package com.common.data.module
 
+import com.chefio.BuildConfig
 import com.common.data.network.api.IApiService1
 import com.common.data.network.api.IApiService2
 import com.common.data.network.api.IBaseService
 import com.common.data.network.repository.ApiRepository
 import com.google.gson.GsonBuilder
-import com.chefio.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,7 +52,7 @@ object NetworkModule {
     ): IApiService2 {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BaseUrl)
-            .client(IBaseService.getOkHttpClient(true))
+            .client(IBaseService.getOkHttpClient(false))
             .addConverterFactory(gsonConverterFactory)
             .addConverterFactory(scalarsConverterFactory)
             .build().create(IApiService2::class.java)

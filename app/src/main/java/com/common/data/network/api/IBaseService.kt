@@ -1,7 +1,7 @@
 package com.common.data.network.api
 
-import com.common.data.network.AuthInterceptor
 import com.chefio.BuildConfig
+import com.common.data.network.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object IBaseService {
 
-    const val Authorization = "Authorization"
+    const val Authorization = "x-access-token"
     const val IS_REFRESH_TOKEN = "isRefreshToken"
     const val Accept = "Accept"
     const val DeviceType = "device-type"

@@ -59,6 +59,60 @@
                     android:textColorHint="@color/light_red"
                     android:textSize="@dimen/_12sdp" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etUserName">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:gravity="center"
+                        app:ccp_autoDetectCountry="true"
+                        app:ccp_clickable="true"
+                        app:ccp_showNameCode="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/etMobileNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_mobile_number"
+                        android:paddingEnd="0dp"
+                        android:textColorHint="@color/light_red"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ccp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/etCaption"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_caption"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
                 <TextView
                     android:id="@+id/etBirthDate"
                     android:layout_width="match_parent"
@@ -215,6 +269,62 @@
                         android:src="@drawable/icon_arrow_down" />
 
                 </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/etFbLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_facebook_link"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:maxLines="1"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etYtLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_youtube_link"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:maxLines="1"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etInstaLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_insta_link"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:maxLines="1"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etXLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_twitter_link"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:maxLines="1"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 

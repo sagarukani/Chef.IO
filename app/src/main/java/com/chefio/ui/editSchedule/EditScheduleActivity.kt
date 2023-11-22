@@ -2,6 +2,7 @@ package com.chefio.ui.editSchedule
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.chefio.R
 import com.chefio.databinding.ActivityEditScheduleBinding
 import com.common.base.BaseActivity
@@ -10,13 +11,29 @@ import java.util.Calendar
 
 class EditScheduleActivity :
     BaseActivity<ActivityEditScheduleBinding>(R.layout.activity_edit_schedule) {
+
+    private val viewModel: ScheduleViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
         onClick()
+        setUpObserver()
+    }
+
+    private fun setUpObserver() {
+        viewModel.apiErrors.observe(this) { handleError(it) }
+
+        viewModel.appLoader.observe(this) { updateLoaderUI(it) }
+
+        viewModel.schedule.observe(this) {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun onClick() {
+        binding.btnSave.setOnClickListener {
+
+        }
         binding.llMondayStart.setOnClickListener {
             showTimePicker {
                 binding.tvMondayStart.text = it

@@ -68,7 +68,7 @@
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/round_corner_boarder"
-            android:hint="@string/enter_your_email_address"
+            android:hint="@string/enter_your_username"
             android:paddingStart="@dimen/_12sdp"
             android:paddingEnd="0dp"
             android:textColorHint="@color/light_red"

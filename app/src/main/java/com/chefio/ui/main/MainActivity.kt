@@ -4,12 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.common.base.BaseActivity
-import com.common.data.database.entities.UserLocal
-import com.common.utils.EventBus
-import com.common.utils.EventBus.listenEvent
 import com.chefio.R
 import com.chefio.databinding.ActivityMainBinding
+import com.common.base.BaseActivity
+import com.common.utils.EventBus
+import com.common.utils.EventBus.listenEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -50,7 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setUpUi() {
         binding.textMessage.text = "Activity Main Binding"
         binding.textMessage.setOnClickListener {
-            viewModel.insertUser(UserLocal().apply { displayAlias = "Rohan" })
+
         }
 
     }

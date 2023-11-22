@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/round_corner_boarder"
             android:hint="@string/enter_your_email_address"
             android:paddingStart="@dimen/_12sdp"
@@ -63,48 +63,26 @@
             android:textColorHint="@color/light_red"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rlSpinner" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clMobileNumber"
+        <EditText
+            android:id="@+id/etUserName"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/round_corner_boarder"
+            android:hint="@string/enter_your_username"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="0dp"
+            android:textColorHint="@color/light_red"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etEmail">
-
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:gravity="center"
-                app:ccp_autoDetectCountry="true"
-                app:ccp_clickable="true"
-                app:ccp_showNameCode="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/etMobileNumber"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@android:color/transparent"
-                android:hint="@string/enter_mobile_number"
-                android:paddingEnd="0dp"
-                android:textColorHint="@color/light_red"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ccp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -120,7 +98,7 @@
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clMobileNumber" />
+            app:layout_constraintTop_toBottomOf="@id/etUserName" />
 
         <EditText
             android:id="@+id/etConfirmPassword"

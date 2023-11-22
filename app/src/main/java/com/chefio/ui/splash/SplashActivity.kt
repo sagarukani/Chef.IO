@@ -29,7 +29,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
         pref.isLoggedIn = false
         mRunnable = Runnable {
-            if (/*pref.isLoggedIn*/true){
+            if (pref.isLoggedIn){
                 startActivity(Intent(this,HomeActivity::class.java))
                 finish()
             }else{

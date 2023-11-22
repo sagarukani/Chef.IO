@@ -88,4 +88,10 @@
     <string name="what_s_on_your_head">What’s on your head?</string>
     <string name="image">Image</string>
     <string name="video">Video</string>
+    <string name="enter_your_username">Enter username</string>
+    <string name="enter_facebook_link">Enter facebook link</string>
+    <string name="enter_youtube_link">Enter youtube link</string>
+    <string name="enter_insta_link">Enter instagram link</string>
+    <string name="enter_twitter_link">Enter twitter(X) link</string>
+    <string name="enter_caption">Enter caption</string>
 </resources>

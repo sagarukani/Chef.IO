@@ -9,11 +9,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.chefio.R
 import com.chefio.databinding.ActivityUserRegistrationBinding
 import com.chefio.ui.detailedRegistration.cusines.SelectCuisinesActivity
+import com.chefio.ui.register.ResgisterViewModel
 import com.chefio.ui.thankyou.ThankYouActivity
 import com.common.base.BaseActivity
+import com.common.data.network.model.request.AddressReqModel
+import com.common.data.network.model.request.EditProfileReqModelItem
 import com.common.utils.getGenders
 import timber.log.Timber
 import java.util.Calendar
@@ -21,6 +25,8 @@ import java.util.Calendar
 class UserRegistrationActivity :
     BaseActivity<ActivityUserRegistrationBinding>(R.layout.activity_user_registration),
     AdapterView.OnItemSelectedListener {
+
+    private val viewModel: ResgisterViewModel by viewModels()
 
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var datePicker: DatePicker
@@ -33,6 +39,33 @@ class UserRegistrationActivity :
         super.onCreate(savedInstanceState)
         initView()
         onClick()
+        setUpObserver()
+    }
+
+    private fun setUpObserver() {
+        viewModel.apiErrors.observe(this) { handleError(it) }
+
+        viewModel.appLoader.observe(this) { updateLoaderUI(it) }
+
+        viewModel.address.observe(this) {
+            val intent = Intent(this, ThankYouActivity::class.java)
+            intent.putExtra(ThankYouActivity.IS_NEW_REG, true)
+            startActivity(intent)
+        }
+        viewModel.editProfile.observe(this) {
+            val addressReqModel = AddressReqModel(
+                street1 = binding.etLineOne.text.toString().trim(),
+                street2 = binding.etLineTwo.text.toString().trim(),
+                city = binding.etCity.text.toString().trim(),
+                province = binding.etProvince.text.toString().trim(),
+                postalcode = binding.etZipCode.text.toString().trim(),
+                country = binding.etCountry.text.toString().trim(),
+                gender = gender,
+                mobilenumber = binding.etMobileNumber.text.toString().trim().toInt(),
+                profilepicture = "djhcb"
+            )
+            viewModel.address(addressReqModel)
+        }
     }
 
     private fun validateInput(): Boolean {
@@ -66,9 +99,20 @@ class UserRegistrationActivity :
     private fun onClick() {
         binding.btnRegister.setOnClickListener {
             if (validateInput()) {
-                val intent = Intent(this, ThankYouActivity::class.java)
-                intent.putExtra(ThankYouActivity.IS_NEW_REG, true)
-                startActivity(intent)
+                val editProfileReqModel = EditProfileReqModelItem(
+                    Xlink = binding.etXLink.text.toString().trim(),
+                    instagramlink = binding.etInstaLink.text.toString().trim(),
+                    youtubelink = binding.etYtLink.text.toString().trim(),
+                    facebooklink = binding.etFbLink.text.toString().trim(),
+                    intro = binding.etCaption.text.toString().trim(),
+                    cuisines = cuisine,
+                    preferedcities = binding.etCity.text.toString().trim()
+                )
+
+                val model = ArrayList<EditProfileReqModelItem>()
+                model.add(editProfileReqModel)
+
+                viewModel.editProfile(model)
             }
         }
 

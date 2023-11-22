@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.activity.viewModels
 import com.chefio.R
 import com.chefio.databinding.ActivityLoginBinding
 import com.chefio.ui.forgotPassword.ForgotPasswordActivity
 import com.chefio.ui.home.HomeActivity
-import com.chefio.ui.main.MainActivity
 import com.chefio.ui.register.RegisterActivity
 import com.common.base.BaseActivity
+import com.common.data.network.model.request.LoginRequestModel
 import com.common.utils.getCustomObjects
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
     AdapterView.OnItemSelectedListener {
 
@@ -26,23 +28,41 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         super.onCreate(savedInstanceState)
         initView()
         onClick()
+        setUpObserver()
+    }
+
+    private fun setUpObserver() {
+        viewModel.apiErrors.observe(this) { handleError(it) }
+
+        viewModel.appLoader.observe(this) { updateLoaderUI(it) }
+
+        viewModel.login.observe(this) {
+            pref.isLoggedIn = true
+            pref.authToken = it.accessToken
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
     }
 
     private fun onClick() {
         binding.btnLogin.setOnClickListener { _ ->
             if (validateInput()) {
-                pref.isLoggedIn = true
-                startActivity(Intent(this,HomeActivity::class.java))
-                finish()
-            }else{
+                val req =
+                    LoginRequestModel(
+                        binding.etPassword.text.toString(),
+                        binding.etEmail.text.toString()
+                    )
+                Timber.d(req.toString())
+                viewModel.login(req)
+            } else {
                 showMessage("Please enter all details and select role to login")
             }
         }
         binding.tvForgotPassword.setOnClickListener {
-            startActivity(Intent(this,ForgotPasswordActivity::class.java))
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
         binding.tvSignUp.setOnClickListener {
-            startActivity(Intent(this,RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -61,7 +81,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
         binding.spRole.onItemSelectedListener = this
     }
-
 
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

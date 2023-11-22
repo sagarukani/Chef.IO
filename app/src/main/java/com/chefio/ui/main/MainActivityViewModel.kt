@@ -36,14 +36,14 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun callApi() {
-        viewModelScope.launch {
-            displayLoader()
-            processDataEvent(apiRepository.getUsers(), onError = {
-                _userInfoError.postValue(it)
-            }) {
-                _userInfo.postValue(it)
-            }
-        }
+//        viewModelScope.launch {
+//            displayLoader()
+//            processDataEvent(apiRepository.getUsers(), onError = {
+//                _userInfoError.postValue(it)
+//            }) {
+//                _userInfo.postValue(it)
+//            }
+//        }
     }
 
     fun insertUser(userLocal: UserLocal) {
