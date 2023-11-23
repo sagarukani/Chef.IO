@@ -71,8 +71,7 @@ exports.address = async (req, res) => {
             {
                 where: {id: userID}
             }).then(() => {
-
-            res.send({message: User});
+            res.send(address);
         });
     });
 };
