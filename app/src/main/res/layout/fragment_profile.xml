@@ -32,6 +32,7 @@
             android:id="@+id/ivProfile"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
+            android:scaleType="fitXY"
             android:layout_marginTop="@dimen/_40sdp"
             android:src="@drawable/profile_demo"
             app:layout_constraintEnd_toEndOf="parent"

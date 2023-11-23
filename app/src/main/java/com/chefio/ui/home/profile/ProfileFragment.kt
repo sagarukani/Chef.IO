@@ -1,8 +1,12 @@
 package com.chefio.ui.home.profile
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.chefio.R
 import com.chefio.databinding.FragmentProfileBinding
@@ -27,6 +31,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             val intent = Intent(context, EditProfileActivity::class.java)
             startActivity(intent)
         }
+        binding.ivEdit.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
         binding.llPaymentPreference.setOnClickListener {
             val intent = Intent(context, PaymentActivity::class.java)
             startActivity(intent)
@@ -43,7 +51,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             val intent = Intent(context, EditScheduleActivity::class.java)
             startActivity(intent)
         }
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+            resultLauncher.launch(intent)
+        }
     }
+
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+
+                val selectedImageUri: Uri = result.data?.data!!
+                binding.ivProfile.setImageURI(selectedImageUri)
+            }
+        }
+
 
     private fun initView() {
         binding.llEditSchedule.isVisible = !pref.isUser

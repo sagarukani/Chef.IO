@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -37,6 +38,17 @@ class EditProfileActivity :
 
     }
 
+    private var resultLauncherImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+
+                val data: Intent? = result.data
+                Timber.d("data is ${data?.getStringExtra("list")}")
+
+                cuisine = data?.getStringExtra("list").toString()
+            }
+        }
+
     private fun validateInput(): Boolean {
         if (binding.etFirstName.text.isNullOrEmpty()) {
             return false
@@ -66,6 +78,10 @@ class EditProfileActivity :
     }
 
     private fun onClick() {
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+            resultLauncherImage.launch(intent)
+        }
         binding.btnRegister.setOnClickListener {
             if (validateInput()) {
                 val intent = Intent(this, ThankYouActivity::class.java)

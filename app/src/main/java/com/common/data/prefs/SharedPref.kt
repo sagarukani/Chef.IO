@@ -2,6 +2,7 @@ package com.common.data.prefs
 
 import android.content.Context
 import com.common.data.network.model.UserInfo
+import com.common.data.network.model.request.ScheduleReqModel
 import com.google.gson.Gson
 
 class SharedPref(context: Context, private val gson: Gson) : EncryptedPreferences(context) {
@@ -29,6 +30,14 @@ class SharedPref(context: Context, private val gson: Gson) : EncryptedPreference
     var isUser : Boolean // true = user,false = chef
         get() = getBoolean(this::isUser.name,false)
         set(value) = setBoolean(this::isUser.name,value)
+
+    var schedule : ScheduleReqModel? // true = user,false = chef
+        set(value) = setString(this::schedule.name, toJson(value))
+        get() = try {
+            fromJson(getString(this::schedule.name))
+        } catch (e: Exception) {
+            null
+        }
 
 
     var userInfo: UserInfo?

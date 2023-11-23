@@ -26,22 +26,18 @@ exports.address = async (req, res) => {
     let userID;
     try {
         const decode = jwt.verify(token, s);
-        // console.log(decode);
         userID = decode.id;
     } catch (err) {
         console.error('JWT')
     }
-    try {
 
+    try {
         await uploadFile(req, res);
 
         if (req.file === undefined) {
             return res.status(400).send({message: "Please upload a file!"});
         }
 
-        res.status(200).send({
-            message: "Uploaded the file successfully: " + req.file.originalname,
-        });
     } catch (err) {
         if (err.code == "LIMIT_FILE_SIZE") {
             return res.status(500).send({
@@ -76,7 +72,7 @@ exports.address = async (req, res) => {
                 where: {id: userID}
             }).then(() => {
 
-            res.send({message: "User data updated"});
+            res.send({message: User});
         });
     });
 };

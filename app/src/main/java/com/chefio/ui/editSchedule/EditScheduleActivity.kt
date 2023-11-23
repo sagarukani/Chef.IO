@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import com.chefio.R
 import com.chefio.databinding.ActivityEditScheduleBinding
 import com.common.base.BaseActivity
+import com.common.data.network.model.request.ScheduleReqModel
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -27,12 +29,56 @@ class EditScheduleActivity :
 
         viewModel.schedule.observe(this) {
             onBackPressedDispatcher.onBackPressed()
+
+        }
+    }
+
+    private fun validateInput(): Boolean {
+        if (binding.tvMondayStart.text.isBlank() && binding.tvMondayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvTuesdayStart.text.isBlank() && binding.tvTuesdayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvWednesdayStart.text.isBlank() && binding.tvWednesdayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvThursdayStart.text.isBlank() && binding.tvThursdayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvFridayStart.text.isBlank() && binding.tvFridayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvSaturdayStart.text.isBlank() && binding.tvSaturdayEnd.text.isBlank()) {
+            return false
+        } else if (binding.tvSundayStart.text.isBlank() && binding.tvSundayEnd.text.isBlank()) {
+            return false
+        } else {
+            return true
         }
     }
 
     private fun onClick() {
         binding.btnSave.setOnClickListener {
+            if (validateInput()) {
+                val scheduleViewModel = ScheduleReqModel(
+                    mondaytime = binding.tvMondayStart.text.toString()
+                        .trim() + "-" + binding.tvMondayEnd.text.toString().trim(),
+                    tuesdaytime = binding.tvTuesdayStart.text.toString()
+                        .trim() + "-" + binding.tvTuesdayEnd.text.toString().trim(),
+                    wednesdaytime = binding.tvWednesdayStart.text.toString()
+                        .trim() + "-" + binding.tvWednesdayEnd.text.toString().trim(),
+                    thursdaytime = binding.tvThursdayStart.text.toString()
+                        .trim() + "-" + binding.tvThursdayEnd.text.toString().trim(),
+                    fridaytime = binding.tvFridayStart.text.toString()
+                        .trim() + "-" + binding.tvFridayEnd.text.toString().trim(),
+                    saturdaytime = binding.tvSaturdayStart.text.toString()
+                        .trim() + "-" + binding.tvSaturdayEnd.text.toString().trim(),
+                    sundayatime = binding.tvSundayStart.text.toString()
+                        .trim() + "-" + binding.tvSundayEnd.text.toString().trim()
+                )
 
+                Timber.d(scheduleViewModel.toString())
+                val list = ArrayList<ScheduleReqModel>()
+                list.add(scheduleViewModel)
+                pref.schedule = scheduleViewModel
+                viewModel.schedule(list)
+            }
         }
         binding.llMondayStart.setOnClickListener {
             showTimePicker {

@@ -7,9 +7,8 @@ import com.common.base.BaseViewModel
 import com.common.base.SingleLiveEvent
 import com.common.data.database.daos.AppDao
 import com.common.data.datastore.PreferenceDataStoreHelper
-import com.common.data.network.model.LoginResponse
 import com.common.data.network.model.MessageResponse
-import com.common.data.network.model.request.LoginRequestModel
+import com.common.data.network.model.request.ScheduleReqModel
 import com.common.data.network.repository.ApiRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,12 +19,12 @@ class ScheduleViewModel @Inject constructor(
     private val dataStore: PreferenceDataStoreHelper,
 ) : BaseViewModel() {
     private val _schedule = SingleLiveEvent<MessageResponse>()
-    val schedule: LiveData<LoginResponse> = _schedule
+    val schedule: LiveData<MessageResponse> = _schedule
 
     private val _loginError = MutableLiveData<Throwable>()
     val loginError: LiveData<Throwable> = _loginError
 
-    fun schedule(reqLogin: LoginRequestModel) {
+    fun schedule(reqLogin: ArrayList<ScheduleReqModel>) {
         viewModelScope.launch {
             displayLoader()
             processDataEvent(apiRepository.scheduleCreate(reqLogin), onError = {
