@@ -46,26 +46,32 @@ exports.createPost = (req, res) =>{
         caption: req.body.caption,
         likecount: req.body.likecount,
         postdate: new Date().toString()
-    }).then( ()=>{
-        res.send({message: "Post created"});
-    }
+    }).then( async () => {
+            let chef = await Chef.findOne({
+                where: {userid: userID}
+            });
+            let createdpost = await Post.findOne({
+                where: {chefid: chef.id}
+            })
+            res.send(createdpost);
+        }
     )};
-exports.getOwnPost = (req, res) => {
+exports.getOwnPost = async (req, res) => {
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
         console.error('JWT')
     }
     let chef = Chef.findOne({
         where: {userid: userID}
     });
-    let mypost = Post.findAll({where: {chefid: chef.id}});
+    let mypost = await Post.findAll({where: {chefid: chef.id}});
     res.send(mypost);
 }
 exports.editpost = (req, res) => {
@@ -77,12 +83,15 @@ exports.editpost = (req, res) => {
       caption: req.body.caption,
       likecount: req.body.likecount,
       postdate: new Date().toString()
-  },{where : {id: id}}).then(()=>{
-      res.send({message: "Post Updated"});
+  },{where : {id: id}}).then(async () => {
+      let updatedpost = await Post.findOne({
+          where: {id: id}
+      });
+      res.send(updatedpost);
   })
 };
-exports.getallPost = (req, res) => {
-    let posts = Post.findAll();
+exports.getallPost = async (req, res) => {
+    let posts = await Post.findAll();
     res.send(posts)
 }
 exports.deletePost = (req, res) =>{

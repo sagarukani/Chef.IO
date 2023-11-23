@@ -74,7 +74,6 @@ exports.address = async (req, res) => {
             let updatedUser = await User.findOne({
                 where: {id: userID}
             })
-            console.log(updatedUser)
             res.send(updatedUser);
         });
     });

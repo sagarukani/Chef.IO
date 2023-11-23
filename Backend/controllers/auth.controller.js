@@ -8,6 +8,7 @@ const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 const {where} = require("sequelize");
+const {response} = require("express");
 
 exports.signup = (req, res) => {
     // Save User to Database
@@ -89,4 +90,27 @@ exports.signin = (req, res) => {
         .catch(err => {
             res.status(500).send({ message: err.message });
         });
+};
+
+exports.forgotpassword = async (req, res) => {
+    let username = req.params.username;
+    let password = req.params.password;
+
+    let user = await User.findOne({
+        where: {username: username}
+    }).then(user =>{
+        if (!user) {
+            return res.status(404).send({ message: "User Not found." });
+        }
+        else{
+         user.update({
+             password: bcrypt.hashSync(password, 8)
+         }).then(()=>{
+            res.send({message:"Password Updated"});
+         });
+        }
+    })
+
+
+
 };

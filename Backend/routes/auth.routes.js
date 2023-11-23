@@ -20,6 +20,6 @@ module.exports = function(app) {
     );
 
     app.post("/api/auth/signin", controller.signin);
-
+    app.post("/api/auth/forgotpassword", controller.forgotpassword);
     // app.post("/api/auth/address",[authJwt.verifyToken],controller.address);
 };
