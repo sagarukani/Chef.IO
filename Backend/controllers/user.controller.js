@@ -70,9 +70,12 @@ exports.address = async (req, res) => {
             },
             {
                 where: {id: userID}
-            }).then(() => {
-
-            res.send({message: User});
+            }).then(async () => {
+            let updatedUser = await User.findOne({
+                where: {id: userID}
+            })
+            console.log(updatedUser)
+            res.send(updatedUser);
         });
     });
 };
