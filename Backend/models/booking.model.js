@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) =>{
         bookingtime: {
             type: Sequelize.DATE
         },
-        ebookingday: {
+        bookingday: {
             type: Sequelize.STRING
         },
         bookingstatus: {
