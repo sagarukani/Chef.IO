@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.chefio.R
 import com.chefio.databinding.FragmentProfileBinding
 import com.chefio.ui.editProfile.EditProfileActivity
@@ -15,6 +16,7 @@ import com.chefio.ui.editSchedule.EditScheduleActivity
 import com.chefio.ui.orderHistory.OrderHistoryActivity
 import com.chefio.ui.payment.PaymentActivity
 import com.chefio.ui.resetPassword.ResetPasswordActivity
+import com.chefio.ui.splash.SplashActivity
 import com.common.base.BaseFragment
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
@@ -55,6 +57,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
             resultLauncher.launch(intent)
         }
+        binding.btnLogin.setOnClickListener {
+            pref.clearAppUserData()
+            pref.isLoggedIn = false
+            val intent = Intent(context, SplashActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     private var resultLauncher =
@@ -69,6 +78,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     private fun initView() {
         binding.llEditSchedule.isVisible = !pref.isUser
+        binding.tvName.text = pref.address?.firstname.plus(pref.address?.lastname)
+        binding.tvNumber.text = pref.address?.mobilenumber.toString()
+        Glide.with(this).load(pref.address?.imagePath.toString()).placeholder(R.drawable.image)
+            .into(binding.ivProfile)
     }
 
 }

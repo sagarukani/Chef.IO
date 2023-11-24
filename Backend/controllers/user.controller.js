@@ -20,6 +20,7 @@ exports.chefBoard = (req, res) => {
     res.status(200).send("Chef Content.");
 };
 exports.address = async (req, res) => {
+    console.log("received req")
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;

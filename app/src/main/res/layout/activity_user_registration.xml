@@ -31,6 +31,19 @@
                     android:textSize="@dimen/_18sdp"
                     android:textStyle="bold"/>
 
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/image"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
                 <EditText
                     android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
@@ -269,62 +282,6 @@
                         android:src="@drawable/icon_arrow_down" />
 
                 </RelativeLayout>
-
-                <EditText
-                    android:id="@+id/etFbLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:background="@drawable/round_corner_boarder"
-                    android:hint="@string/enter_facebook_link"
-                    android:paddingStart="@dimen/_12sdp"
-                    android:paddingEnd="0dp"
-                    android:maxLines="1"
-                    android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:id="@+id/etYtLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:background="@drawable/round_corner_boarder"
-                    android:hint="@string/enter_youtube_link"
-                    android:paddingStart="@dimen/_12sdp"
-                    android:paddingEnd="0dp"
-                    android:maxLines="1"
-                    android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:id="@+id/etInstaLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:background="@drawable/round_corner_boarder"
-                    android:hint="@string/enter_insta_link"
-                    android:paddingStart="@dimen/_12sdp"
-                    android:paddingEnd="0dp"
-                    android:maxLines="1"
-                    android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:id="@+id/etXLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:background="@drawable/round_corner_boarder"
-                    android:hint="@string/enter_twitter_link"
-                    android:paddingStart="@dimen/_12sdp"
-                    android:paddingEnd="0dp"
-                    android:maxLines="1"
-                    android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 

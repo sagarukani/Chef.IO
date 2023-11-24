@@ -36,12 +36,9 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory,
         scalarsConverterFactory: ScalarsConverterFactory,
     ): IApiService1 {
-        return Retrofit.Builder()
-            .baseUrl(BuildConfig.BaseUrl)
-            .client(IBaseService.getOkHttpClient(false))
-            .addConverterFactory(gsonConverterFactory)
-            .addConverterFactory(scalarsConverterFactory)
-            .build().create(IApiService1::class.java)
+        return Retrofit.Builder().baseUrl(BuildConfig.BaseUrl)
+            .client(IBaseService.getOkHttpClient(false)).addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(scalarsConverterFactory).build().create(IApiService1::class.java)
     }
 
     @Provides
@@ -50,12 +47,13 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory,
         scalarsConverterFactory: ScalarsConverterFactory,
     ): IApiService2 {
-        return Retrofit.Builder()
-            .baseUrl(BuildConfig.BaseUrl)
-            .client(IBaseService.getOkHttpClient(false))
-            .addConverterFactory(gsonConverterFactory)
-            .addConverterFactory(scalarsConverterFactory)
-            .build().create(IApiService2::class.java)
+        return Retrofit.Builder().baseUrl(BuildConfig.BaseUrl)
+            .client(IBaseService.getOkHttpClient(false)).addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().setLenient().create()
+                )
+            ).addConverterFactory(ScalarsConverterFactory.create()).build()
+            .create(IApiService2::class.java)
     }
 
     @Provides

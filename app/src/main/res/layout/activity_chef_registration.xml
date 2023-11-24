@@ -24,12 +24,25 @@
                     android:id="@+id/tvSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_18sdp"
                     android:text="@string/register_new_account"
-                    android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18sdp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/image"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/_10sdp" />
 
                 <EditText
                     android:id="@+id/etFirstName"
@@ -57,22 +70,76 @@
                     android:textColorHint="@color/light_red"
                     android:textSize="@dimen/_12sdp" />
 
-                <TextView
-                    android:id="@+id/etBirthDate"
+                <EditText
+                    android:id="@+id/etCaption"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_caption"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:clickable="true"
-                    android:layout_gravity="center"
                     android:background="@drawable/round_corner_boarder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etUserName">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:gravity="center"
+                        app:ccp_autoDetectCountry="true"
+                        app:ccp_clickable="true"
+                        app:ccp_showNameCode="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/etMobileNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_mobile_number"
+                        android:paddingEnd="0dp"
+                        android:textColorHint="@color/light_red"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ccp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/etBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="start|center_vertical"
                     android:hint="@string/enter_birthdate"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="0dp"
-                    android:gravity="start|center_vertical"
                     android:textColorHint="@color/light_red"
-                    android:textSize="@dimen/_12sdp"
-                    android:focusable="true" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <RelativeLayout
                     android:id="@+id/rlSpinner"
@@ -200,12 +267,68 @@
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
-                        android:rotation="270"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:rotation="270"
                         android:src="@drawable/icon_arrow_down" />
 
                 </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/etFbLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_facebook_link"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etYtLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_youtube_link"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etInstaLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_insta_link"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/etXLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/round_corner_boarder"
+                    android:hint="@string/enter_twitter_link"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_red"
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 

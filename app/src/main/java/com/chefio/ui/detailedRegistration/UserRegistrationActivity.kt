@@ -2,26 +2,33 @@ package com.chefio.ui.detailedRegistration
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
 import com.chefio.R
 import com.chefio.databinding.ActivityUserRegistrationBinding
 import com.chefio.ui.detailedRegistration.cusines.SelectCuisinesActivity
 import com.chefio.ui.register.ResgisterViewModel
 import com.chefio.ui.thankyou.ThankYouActivity
 import com.common.base.BaseActivity
-import com.common.data.network.model.request.AddressReqModel
-import com.common.data.network.model.request.EditProfileReqModelItem
 import com.common.utils.getGenders
+import com.common.utils.multipartImageBody
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.io.File
 import java.util.Calendar
 
+
+@AndroidEntryPoint
 class UserRegistrationActivity :
     BaseActivity<ActivityUserRegistrationBinding>(R.layout.activity_user_registration),
     AdapterView.OnItemSelectedListener {
@@ -33,7 +40,8 @@ class UserRegistrationActivity :
 
 
     private var cuisine: String = ""
-
+    private var path: String = ""
+    private lateinit var uri: Uri
     private var gender: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +61,22 @@ class UserRegistrationActivity :
             startActivity(intent)
         }
         viewModel.editProfile.observe(this) {
-            val addressReqModel = AddressReqModel(
-                street1 = binding.etLineOne.text.toString().trim(),
-                street2 = binding.etLineTwo.text.toString().trim(),
-                city = binding.etCity.text.toString().trim(),
-                province = binding.etProvince.text.toString().trim(),
-                postalcode = binding.etZipCode.text.toString().trim(),
-                country = binding.etCountry.text.toString().trim(),
-                gender = gender,
-                mobilenumber = binding.etMobileNumber.text.toString().trim().toInt(),
-                profilepicture = "djhcb"
-            )
-            viewModel.address(addressReqModel)
+
+            val destination = File(uri.path)
+
+            val builder = destination.multipartImageBody("file")
+            builder.addFormDataPart("street1", binding.etLineOne.text.toString().trim())
+            builder.addFormDataPart("street2", binding.etLineTwo.text.toString().trim())
+            builder.addFormDataPart("city", binding.etCity.text.toString().trim())
+            builder.addFormDataPart("province", binding.etProvince.text.toString().trim())
+            builder.addFormDataPart("postalcode", binding.etZipCode.text.toString().trim())
+            builder.addFormDataPart("country", binding.etCountry.text.toString().trim())
+            builder.addFormDataPart("gender", gender.toString())
+            builder.addFormDataPart("mobilenumber", binding.etMobileNumber.text.toString().trim())
+            builder.addFormDataPart("firstname", binding.etFirstName.text.toString().trim())
+            builder.addFormDataPart("lastname", binding.etLastName.text.toString().trim())
+
+            viewModel.address(builder.build())
         }
     }
 
@@ -89,30 +101,60 @@ class UserRegistrationActivity :
             return false
         } else if (cuisine.isNullOrEmpty()) {
             return false
-        } else if (gender == 0) {
-            return false
-        } else {
-            return true
+        } else return gender != 0
+    }
+
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri != null) {
+                handlePickedImage(uri)
+            } else {
+                showMessage("Please select other image")
+            }
+        }
+
+    private fun handlePickedImage(uri: Uri) {
+        val filePath: String? = getRealPathFromURI(this, uri)
+        path = filePath.toString()
+        Glide.with(this).load(filePath).into(binding.ivProfile)
+    }
+
+    private fun getRealPathFromURI(context: Context, contentUri: Uri): String? {
+        val cursor = context.contentResolver.query(contentUri, null, null, null, null)
+        return cursor?.use {
+            it.moveToFirst()
+            val columnIndex = it.getColumnIndex(MediaStore.Images.Media.DATA)
+            columnIndex.let { it1 -> it.getString(it1) }
         }
     }
 
     private fun onClick() {
+        binding.ivProfile.setOnClickListener {
+            pickImageLauncher.launch("image/*")
+        }
         binding.btnRegister.setOnClickListener {
-            if (validateInput()) {
-                val editProfileReqModel = EditProfileReqModelItem(
-                    Xlink = binding.etXLink.text.toString().trim(),
-                    instagramlink = binding.etInstaLink.text.toString().trim(),
-                    youtubelink = binding.etYtLink.text.toString().trim(),
-                    facebooklink = binding.etFbLink.text.toString().trim(),
-                    intro = binding.etCaption.text.toString().trim(),
-                    cuisines = cuisine,
-                    preferedcities = binding.etCity.text.toString().trim()
+            if (validateInput() && path.isNotEmpty()) {
+                val destination = File(path)
+
+                val builder = destination.multipartImageBody("file")
+                builder.addFormDataPart("street1", binding.etLineOne.text.toString().trim())
+                builder.addFormDataPart("street2", binding.etLineTwo.text.toString().trim())
+                builder.addFormDataPart("city", binding.etCity.text.toString().trim())
+                builder.addFormDataPart("province", binding.etProvince.text.toString().trim())
+                builder.addFormDataPart("postalcode", binding.etZipCode.text.toString().trim())
+                builder.addFormDataPart("country", binding.etCountry.text.toString().trim())
+                builder.addFormDataPart("gender", gender.toString())
+                builder.addFormDataPart(
+                    "mobilenumber",
+                    binding.etMobileNumber.text.toString().trim()
                 )
+                builder.addFormDataPart("firstname", binding.etFirstName.text.toString().trim())
+                builder.addFormDataPart("lastname", binding.etLastName.text.toString().trim())
 
-                val model = ArrayList<EditProfileReqModelItem>()
-                model.add(editProfileReqModel)
-
-                viewModel.editProfile(model)
+                viewModel.address(builder.build())
+            } else {
+                showMessage("Please enter all details and choose profile picture")
             }
         }
 

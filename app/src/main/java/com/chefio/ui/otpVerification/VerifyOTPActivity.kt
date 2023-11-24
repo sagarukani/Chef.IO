@@ -11,8 +11,10 @@ import com.chefio.ui.login.LoginActivityViewModel
 import com.chefio.ui.resetPassword.ResetPasswordActivity
 import com.common.base.BaseActivity
 import com.common.data.network.model.request.LoginRequestModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class VerifyOTPActivity :
     BaseActivity<ActivityVerifyOtpactivityBinding>(R.layout.activity_verify_otpactivity) {
 

@@ -5,16 +5,19 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.chefio.R
 import com.chefio.databinding.ActivityEditScheduleBinding
+import com.chefio.ui.register.ResgisterViewModel
 import com.common.base.BaseActivity
 import com.common.data.network.model.request.ScheduleReqModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
+@AndroidEntryPoint
 class EditScheduleActivity :
     BaseActivity<ActivityEditScheduleBinding>(R.layout.activity_edit_schedule) {
 
-    private val viewModel: ScheduleViewModel by viewModels()
+    private val viewModel: ResgisterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -26,6 +29,10 @@ class EditScheduleActivity :
         viewModel.apiErrors.observe(this) { handleError(it) }
 
         viewModel.appLoader.observe(this) { updateLoaderUI(it) }
+
+        viewModel.loginError.observe(this){
+            it.printStackTrace()
+        }
 
         viewModel.schedule.observe(this) {
             onBackPressedDispatcher.onBackPressed()
@@ -55,7 +62,7 @@ class EditScheduleActivity :
 
     private fun onClick() {
         binding.btnSave.setOnClickListener {
-            if (validateInput()) {
+//            if (validateInput()) {
                 val scheduleViewModel = ScheduleReqModel(
                     mondaytime = binding.tvMondayStart.text.toString()
                         .trim() + "-" + binding.tvMondayEnd.text.toString().trim(),
@@ -78,7 +85,7 @@ class EditScheduleActivity :
                 list.add(scheduleViewModel)
                 pref.schedule = scheduleViewModel
                 viewModel.schedule(list)
-            }
+//            }
         }
         binding.llMondayStart.setOnClickListener {
             showTimePicker {
@@ -169,7 +176,7 @@ class EditScheduleActivity :
             timeSetListener,
             cal.get(Calendar.HOUR_OF_DAY),
             cal.get(Calendar.MINUTE),
-            false
+            true
         ).show()
     }
 

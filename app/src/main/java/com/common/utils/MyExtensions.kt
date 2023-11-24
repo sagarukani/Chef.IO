@@ -5,7 +5,12 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.os.Build
-import android.text.*
+import android.text.Html
+import android.text.Selection
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
@@ -20,7 +25,23 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.common.base.BaseAdapter
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+
+fun File.multipartImageBody(paramName: String, mId: String?=null): MultipartBody.Builder {
+    val builder = MultipartBody.Builder()
+    builder.setType(MultipartBody.FORM)
+    if (!mId.isNullOrEmpty())
+        builder.addFormDataPart("mId", mId)
+    builder.addFormDataPart(
+        paramName,
+        this.name.replace("-", "_"),
+        asRequestBody("image/*".toMediaTypeOrNull())
+    )
+    return builder
+}
 
 fun View.closeSoftKeyboard() {
     val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

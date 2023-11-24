@@ -88,7 +88,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -114,7 +114,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -170,7 +170,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -196,7 +196,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -252,7 +252,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -278,7 +278,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -334,7 +334,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -360,7 +360,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -416,7 +416,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -442,7 +442,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -498,7 +498,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -524,7 +524,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -581,7 +581,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="8 PM"
+                                android:text="08:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -607,7 +607,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="11 PM"
+                                android:text="11:00"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp" />
 

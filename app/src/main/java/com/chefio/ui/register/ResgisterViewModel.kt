@@ -8,12 +8,13 @@ import com.common.base.SingleLiveEvent
 import com.common.data.database.daos.AppDao
 import com.common.data.datastore.PreferenceDataStoreHelper
 import com.common.data.network.model.MessageResponse
-import com.common.data.network.model.request.AddressReqModel
 import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.request.ScheduleReqModel
 import com.common.data.network.model.request.SignupReqModel
 import com.common.data.network.repository.ApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,8 +31,22 @@ class ResgisterViewModel @Inject constructor(
     private val _address = SingleLiveEvent<MessageResponse>()
     val address: LiveData<MessageResponse> = _address
 
-    private val _editProfile = SingleLiveEvent<MessageResponse>()
-    val editProfile: LiveData<MessageResponse> = _editProfile
+    private val _editProfile = SingleLiveEvent<Any>()
+    val editProfile: LiveData<Any> = _editProfile
+
+    private val _schedule = SingleLiveEvent<MessageResponse>()
+    val schedule: LiveData<MessageResponse> = _schedule
+
+    fun schedule(reqLogin: ArrayList<ScheduleReqModel>) {
+        viewModelScope.launch {
+            displayLoader()
+            processDataEvent(apiRepository.scheduleCreate(reqLogin), onError = {
+                _loginError.postValue(it)
+            }) {
+                _schedule.postValue(it)
+            }
+        }
+    }
     fun signup(reqLogin: SignupReqModel) {
         viewModelScope.launch {
             displayLoader()
@@ -43,10 +58,10 @@ class ResgisterViewModel @Inject constructor(
         }
     }
 
-    fun address(reqLogin: AddressReqModel) {
+    fun address(multipartBody: MultipartBody) {
         viewModelScope.launch {
             displayLoader()
-            processDataEvent(apiRepository.address(reqLogin), onError = {
+            processDataEvent(apiRepository.address(multipartBody), onError = {
                 _loginError.postValue(it)
             }) {
                 _address.postValue(it)
@@ -58,7 +73,7 @@ class ResgisterViewModel @Inject constructor(
         viewModelScope.launch {
             displayLoader()
             processDataEvent(apiRepository.editProfile(reqLogin), onError = {
-                _loginError.postValue(it)
+                _editProfile.postValue(it)
             }) {
                 _editProfile.postValue(it)
             }

@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner = AppConfig.testInstrumentationRunner
         multiDexEnabled = true
         //Change your API url here
-        buildConfigField("String", "BaseUrl", "\"https://c143-2605-8d80-6e0-f4de-1933-2182-fbc8-fd96.ngrok-free.app/api/\"")
+        buildConfigField("String", "BaseUrl", "\"https://5fd9-2607-fea8-1d65-4300-2827-4315-eb58-6b01.ngrok-free.app/api/\"")
 
         kapt {
             arguments {
@@ -125,6 +125,9 @@ dependencies {
     implementation(Libs.imageView)
     implementation(Libs.rating)
     implementation("com.github.KevinSchildhorn:OTPView:0.2.5")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 }
 
 protobuf {

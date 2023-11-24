@@ -154,6 +154,7 @@ exports.editchefprofile = (req, res) => {
         let createdchef = await Chef.findOne({
             where: {userid: userID}
         });
+        console.log(createdchef)
         res.send(createdchef);
     });
 }

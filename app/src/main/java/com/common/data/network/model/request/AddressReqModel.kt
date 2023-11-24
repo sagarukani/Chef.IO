@@ -1,13 +1,16 @@
 package com.common.data.network.model.request
 
 data class AddressReqModel(
-    val city: String,
-    val country: String,
-    val gender: Int,
-    val mobilenumber: Int,
-    val postalcode: String,
-    val profilepicture: String,
-    val province: String,
-    val street1: String,
-    val street2: String
+    var city: String,
+    var country: String,
+    var gender: Int,
+    var mobilenumber: Int,
+    var postalcode: String,
+    var file: String,
+    var province: String,
+    var street1: String,
+    var street2: String,
+    var imagePath : String,
+    var firstname:String,
+    var lastname : String
 )
