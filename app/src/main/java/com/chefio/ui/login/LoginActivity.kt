@@ -37,6 +37,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         viewModel.appLoader.observe(this) { updateLoaderUI(it) }
 
         viewModel.login.observe(this) {
+            pref.isUser = !it.roles.contains("ROLE_CHEF")
             pref.isLoggedIn = true
             pref.authToken = it.accessToken
             startActivity(Intent(this, HomeActivity::class.java))

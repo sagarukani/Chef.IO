@@ -94,4 +94,5 @@
     <string name="enter_insta_link">Enter instagram link</string>
     <string name="enter_twitter_link">Enter twitter(X) link</string>
     <string name="enter_caption">Enter caption</string>
+    <string name="add">Add</string>
 </resources>

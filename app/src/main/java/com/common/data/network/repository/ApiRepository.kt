@@ -6,7 +6,9 @@ import com.common.data.ApiSuccess
 import com.common.data.network.api.IApiService1
 import com.common.data.network.api.IApiService2
 import com.common.data.network.model.ResponseCode
-import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.request.AddCardReqModel
+import com.common.data.network.model.request.ChefProfileReqModel
+import com.common.data.network.model.request.EditCardReqModel
 import com.common.data.network.model.request.LoginRequestModel
 import com.common.data.network.model.request.ScheduleReqModel
 import com.common.data.network.model.request.SignupReqModel
@@ -28,14 +30,22 @@ class ApiRepository(
     suspend fun login(reqLogin: LoginRequestModel) = callApi { apiService1.login(reqLogin) }
     suspend fun signup(reqLogin: SignupReqModel) = callApi { apiService1.signup(reqLogin) }
     suspend fun address(multipartBody: MultipartBody) = callApi { apiService2.address(multipartBody) }
-    suspend fun editProfile(reqLogin: ArrayList<EditProfileReqModelItem>) =
+    suspend fun editProfile(reqLogin: ArrayList<ChefProfileReqModel>) =
         callApi { apiService1.editProfile(reqLogin) }
 
-    suspend fun scheduleCreate(reqLogin: ArrayList<ScheduleReqModel>) =
+    suspend fun scheduleCreate(reqLogin: ScheduleReqModel) =
         callApi { apiService1.scheduleCreate(reqLogin) }
+
+    suspend fun getUserProfile() =
+        callApi { apiService1.getUserProfile() }
 
     suspend fun getownschedule() =
         callApi { apiService1.getownschedule() }
+
+    suspend fun getCards() = callApi { apiService1.getCards() }
+    suspend fun addCard(addCardReqModel: AddCardReqModel) = callApi { apiService1.addCard(addCardReqModel) }
+    suspend fun editCard(addCardReqModel: EditCardReqModel) = callApi { apiService1.editCard(addCardReqModel) }
+    suspend fun deleteCard(addCardReqModel: EditCardReqModel) = callApi { apiService1.deleteCard(addCardReqModel) }
 
     suspend fun dummy() = callApi { apiService2.dummy() }
 

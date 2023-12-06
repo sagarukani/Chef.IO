@@ -21,7 +21,7 @@ import com.chefio.ui.register.ResgisterViewModel
 import com.chefio.ui.thankyou.ThankYouActivity
 import com.common.base.BaseActivity
 import com.common.data.network.model.request.AddressReqModel
-import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.request.ChefProfileReqModel
 import com.common.utils.getGenders
 import com.common.utils.multipartImageBody
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +42,6 @@ class ChefRegistrationActivity :
 
     private var cuisine: String = ""
     private var path: String = ""
-    private lateinit var uri: Uri
     private var gender: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,17 +56,28 @@ class ChefRegistrationActivity :
         viewModel.appLoader.observe(this) { updateLoaderUI(it) }
 
         viewModel.address.observe(this) {
-            val editProfileReqModel = EditProfileReqModelItem(
+            val editProfileReqModel = ChefProfileReqModel(
                 Xlink = binding.etXLink.text.toString().trim(),
                 instagramlink = binding.etInstaLink.text.toString().trim(),
                 youtubelink = binding.etYtLink.text.toString().trim(),
                 facebooklink = binding.etFbLink.text.toString().trim(),
                 intro = binding.etCaption.text.toString().trim(),
                 cuisines = cuisine,
-                preferedcities = binding.etCity.text.toString().trim()
+                preferedcities = binding.etCity.text.toString().trim(),
+                mondaytime = "",
+                tuesdaytime = "",
+                wednesdaytime = "",
+                thursdaytime = "",
+                fridaytime = "",
+                saturdaytime = "",
+                sundayatime = ""
             )
 
-            val model = ArrayList<EditProfileReqModelItem>()
+
+
+//            pref.editProfileReqModel = editProfileReqModel
+
+            val model = ArrayList<ChefProfileReqModel>()
             model.add(editProfileReqModel)
 
             viewModel.editProfile(model)
@@ -167,7 +177,8 @@ class ChefRegistrationActivity :
                     imagePath = path,
                     file = path,
                     firstname = binding.etFirstName.text.toString().trim(),
-                    lastname = binding.etLastName.text.toString().trim()
+                    lastname = binding.etLastName.text.toString().trim(),
+                    cuisine = cuisine
                 )
 
                 pref.address = addressReqModel

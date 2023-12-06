@@ -8,7 +8,9 @@ import com.common.base.SingleLiveEvent
 import com.common.data.database.daos.AppDao
 import com.common.data.datastore.PreferenceDataStoreHelper
 import com.common.data.network.model.MessageResponse
-import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.ScheduleResponse
+import com.common.data.network.model.UserProfile
+import com.common.data.network.model.request.ChefProfileReqModel
 import com.common.data.network.model.request.ScheduleReqModel
 import com.common.data.network.model.request.SignupReqModel
 import com.common.data.network.repository.ApiRepository
@@ -34,10 +36,13 @@ class ResgisterViewModel @Inject constructor(
     private val _editProfile = SingleLiveEvent<Any>()
     val editProfile: LiveData<Any> = _editProfile
 
-    private val _schedule = SingleLiveEvent<MessageResponse>()
-    val schedule: LiveData<MessageResponse> = _schedule
+    private val _userProfile = SingleLiveEvent<UserProfile>()
+    val userProfile: LiveData<UserProfile> = _userProfile
 
-    fun schedule(reqLogin: ArrayList<ScheduleReqModel>) {
+    private val _schedule = SingleLiveEvent<ScheduleResponse>()
+    val schedule: LiveData<ScheduleResponse> = _schedule
+
+    fun schedule(reqLogin: ScheduleReqModel) {
         viewModelScope.launch {
             displayLoader()
             processDataEvent(apiRepository.scheduleCreate(reqLogin), onError = {
@@ -47,6 +52,7 @@ class ResgisterViewModel @Inject constructor(
             }
         }
     }
+
     fun signup(reqLogin: SignupReqModel) {
         viewModelScope.launch {
             displayLoader()
@@ -69,13 +75,25 @@ class ResgisterViewModel @Inject constructor(
         }
     }
 
-    fun editProfile(reqLogin: ArrayList<EditProfileReqModelItem>) {
+    fun editProfile(reqLogin: ArrayList<ChefProfileReqModel>) {
         viewModelScope.launch {
             displayLoader()
             processDataEvent(apiRepository.editProfile(reqLogin), onError = {
                 _editProfile.postValue(it)
             }) {
                 _editProfile.postValue(it)
+            }
+        }
+    }
+
+    fun getProfile() {
+        viewModelScope.launch {
+            displayLoader()
+            processDataEvent(apiRepository.getUserProfile(), onError = {
+                _loginError.postValue(it)
+                it.printStackTrace()
+            }) {
+                _userProfile.postValue(it)
             }
         }
     }

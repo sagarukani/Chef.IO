@@ -8,11 +8,21 @@ const sequelize = new Sequelize(
     {
       host: config.HOST,
       dialect: config.dialect,
+      logging: (query, options) => {
+        console.log('Executing query:', {
+          query,
+          bind: options.bind,
+          // You can also include other relevant information like the model name or operation type
+          model: options.model,
+          // ...
+        });
+      },
       pool: {
         max: config.pool.max,
         min: config.pool.min,
         acquire: config.pool.acquire,
-        idle: config.pool.idle
+        idle: config.pool.idle,
+        silent : false
       }
     }
   );
@@ -31,6 +41,7 @@ const sequelize = new Sequelize(
   db.feedback = require("./feedback.model")(sequelize, Sequelize);
   db.booking = require("./booking.model")(sequelize, Sequelize);
   db.address = require("./address.model")(sequelize, Sequelize);
+  db.card = require("./card.model")(sequelize, Sequelize);
   // db.cuisine = require("./cuisine.model")(sequelize, Sequelize);
   //
   // db.user.hasOne(db.address);

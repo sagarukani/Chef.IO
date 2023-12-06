@@ -9,7 +9,6 @@ import com.chefio.ui.register.ResgisterViewModel
 import com.common.base.BaseActivity
 import com.common.data.network.model.request.ScheduleReqModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -80,11 +79,8 @@ class EditScheduleActivity :
                         .trim() + "-" + binding.tvSundayEnd.text.toString().trim()
                 )
 
-                Timber.d(scheduleViewModel.toString())
-                val list = ArrayList<ScheduleReqModel>()
-                list.add(scheduleViewModel)
                 pref.schedule = scheduleViewModel
-                viewModel.schedule(list)
+                viewModel.schedule(scheduleViewModel)
 //            }
         }
         binding.llMondayStart.setOnClickListener {
@@ -181,6 +177,21 @@ class EditScheduleActivity :
     }
 
     private fun initView() {
-
+        pref.schedule?.let {
+            binding.tvMondayStart.text = it.mondaytime.substringBefore("-")
+            binding.tvMondayEnd.text = it.mondaytime.substringAfter("-")
+            binding.tvTuesdayStart.text = it.tuesdaytime.substringBefore("-")
+            binding.tvTuesdayEnd.text = it.tuesdaytime.substringAfter("-")
+            binding.tvWednesdayStart.text = it.wednesdaytime.substringBefore("-")
+            binding.tvWednesdayEnd.text = it.wednesdaytime.substringAfter("-")
+            binding.tvThursdayStart.text = it.thursdaytime.substringBefore("-")
+            binding.tvThursdayEnd.text = it.thursdaytime.substringAfter("-")
+            binding.tvFridayStart.text = it.fridaytime.substringBefore("-")
+            binding.tvFridayEnd.text = it.fridaytime.substringAfter("-")
+            binding.tvSaturdayStart.text = it.saturdaytime.substringBefore("-")
+            binding.tvSaturdayEnd.text = it.saturdaytime.substringAfter("-")
+            binding.tvSundayStart.text = it.sundayatime.substringBefore("-")
+            binding.tvSundayEnd.text = it.sundayatime.substringAfter("-")
+        }
     }
 }

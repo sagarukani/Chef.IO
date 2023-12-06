@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) =>{
 
     const Schedule = sequelize.define("schedule", {
         chefid: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         sundayatime: {
             type: Sequelize.STRING

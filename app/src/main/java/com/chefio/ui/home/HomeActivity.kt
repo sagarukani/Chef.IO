@@ -1,6 +1,5 @@
 package com.chefio.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,11 +7,12 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.chefio.R
 import com.chefio.databinding.ActivityHomeBinding
 import com.common.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private lateinit var navController: NavController
 
@@ -40,6 +40,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
             R.id.ChatFragment -> {
                 showToast("Another Menu Item 3 Selected")
             }
+
             R.id.profileFragment -> {
                 showToast("Another Menu Item 3 Selected")
             }
@@ -48,15 +49,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     }
 
     //set an active fragment programmatically
-    fun setSelectedItem(pos:Int){
+    fun setSelectedItem(pos: Int) {
         binding.bottomBar.setSelectedItem(pos)
     }
+
     //set badge indicator
-    fun setBadge(pos:Int){
+    fun setBadge(pos: Int) {
         binding.bottomBar.setBadge(pos)
     }
+
     //remove badge indicator
-    fun removeBadge(pos:Int){
+    fun removeBadge(pos: Int) {
         binding.bottomBar.removeBadge(pos)
     }
 
@@ -69,7 +72,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         popupMenu.inflate(R.menu.menu_bottom)
         val menu = popupMenu.menu
         //binding.bottomBar.setupWithNavController(menu, navController)
-        binding.bottomBar.setupWithNavController( navController)
+        binding.bottomBar.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

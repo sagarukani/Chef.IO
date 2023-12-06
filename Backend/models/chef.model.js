@@ -23,10 +23,10 @@ module.exports = (sequelize, Sequelize) =>{
             type:Sequelize.STRING
         },
         scheduleid: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         userid: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
 
     });

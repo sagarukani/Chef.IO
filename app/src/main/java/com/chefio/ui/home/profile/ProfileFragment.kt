@@ -8,24 +8,52 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.chefio.BuildConfig
 import com.chefio.R
 import com.chefio.databinding.FragmentProfileBinding
 import com.chefio.ui.editProfile.EditProfileActivity
 import com.chefio.ui.editSchedule.EditScheduleActivity
 import com.chefio.ui.orderHistory.OrderHistoryActivity
 import com.chefio.ui.payment.PaymentActivity
+import com.chefio.ui.register.ResgisterViewModel
 import com.chefio.ui.resetPassword.ResetPasswordActivity
 import com.chefio.ui.splash.SplashActivity
 import com.common.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
+    private val viewModel: ResgisterViewModel by viewModels<ResgisterViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
         onClick()
+        setUpObserver()
+
+        Timber.d(pref.address.toString())
+        Timber.d(pref.editProfileReqModel.toString())
+
+        viewModel.getProfile()
+    }
+
+    private fun setUpObserver() {
+        viewModel.apiErrors.observe(this) { handleError(it) }
+
+        viewModel.userProfile.observe(this) {
+            Timber.d(it.toString())
+            pref.userProfile = it
+            binding.llEditSchedule.isVisible = !pref.isUser
+            binding.tvName.text = pref.address?.firstname.plus(it.lastname)
+            binding.tvNumber.text = it?.mobilenumber.toString() ?: ""
+            Glide.with(this).load((BuildConfig.PhotosUrl + it?.profilepicture) ?: "")
+                .placeholder(R.drawable.image)
+                .into(binding.ivProfile)
+        }
     }
 
     private fun onClick() {

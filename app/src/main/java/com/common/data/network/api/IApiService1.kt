@@ -1,8 +1,13 @@
 package com.common.data.network.api
 
+import com.common.data.network.model.AllCardResponse
 import com.common.data.network.model.LoginResponse
 import com.common.data.network.model.MessageResponse
-import com.common.data.network.model.request.EditProfileReqModelItem
+import com.common.data.network.model.ScheduleResponse
+import com.common.data.network.model.UserProfile
+import com.common.data.network.model.request.AddCardReqModel
+import com.common.data.network.model.request.ChefProfileReqModel
+import com.common.data.network.model.request.EditCardReqModel
 import com.common.data.network.model.request.LoginRequestModel
 import com.common.data.network.model.request.ScheduleReqModel
 import com.common.data.network.model.request.SignupReqModel
@@ -24,16 +29,31 @@ interface IApiService1 {
     @POST("user/address")
     suspend fun address(@Body multipartBody: MultipartBody): Response<MessageResponse>
 
-    @POST("chef/editchefprofile")
-    suspend fun editProfile(@Body signupReq: ArrayList<EditProfileReqModelItem>): Response<Any>
+    @POST("chef/profile")
+    suspend fun editProfile(@Body signupReq: ArrayList<ChefProfileReqModel>): Response<Any>
 
     @GET("chef/profile")
     suspend fun getChefProfile(): Response<MessageResponse>
 
-    @POST("chef/scheduleCreate")
-    suspend fun scheduleCreate(@Body schedule: ArrayList<ScheduleReqModel>): Response<MessageResponse>
+    @POST("chef/scheduleUpdate")
+    suspend fun scheduleCreate(@Body schedule: ScheduleReqModel): Response<ScheduleResponse>
 
     @GET("chef/getownschedule")
     suspend fun getownschedule(): Response<MessageResponse>
+
+    @GET("user/getuserprofile")
+    suspend fun getUserProfile(): Response<UserProfile>
+
+    @POST("user/addcard")
+    suspend fun addCard(@Body addCardReqModel: AddCardReqModel) : Response<AllCardResponse>
+
+    @POST("user/editcard")
+    suspend fun editCard(@Body editCardReqModel: EditCardReqModel) : Response<AllCardResponse>
+
+    @POST("user/deletecard")
+    suspend fun deleteCard(@Body editCardReqModel: EditCardReqModel) : Response<MessageResponse>
+
+    @GET("user/getcards")
+    suspend fun getCards() : Response<AllCardResponse>
 
 }

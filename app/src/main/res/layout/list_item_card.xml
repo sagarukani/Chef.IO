@@ -43,6 +43,7 @@
                     app:layout_constraintTop_toTopOf="@id/ivCard" />
 
                 <TextView
+                    android:id="@+id/tvCardNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="**** **** **** 8956"
@@ -54,6 +55,7 @@
 
                 <RadioButton
                     android:id="@+id/rbPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -64,6 +66,7 @@
 
 
                 <ImageView
+                    android:id="@+id/ivDelete"
                     app:layout_constraintEnd_toStartOf="@id/rbPrimary"
                     app:layout_constraintTop_toTopOf="@id/rbPrimary"
                     app:layout_constraintBottom_toBottomOf="@id/rbPrimary"

@@ -76,6 +76,8 @@ class UserRegistrationActivity :
             builder.addFormDataPart("firstname", binding.etFirstName.text.toString().trim())
             builder.addFormDataPart("lastname", binding.etLastName.text.toString().trim())
 
+
+
             viewModel.address(builder.build())
         }
     }
@@ -151,6 +153,18 @@ class UserRegistrationActivity :
                 )
                 builder.addFormDataPart("firstname", binding.etFirstName.text.toString().trim())
                 builder.addFormDataPart("lastname", binding.etLastName.text.toString().trim())
+
+                pref.address?.imagePath = uri.path.toString()
+                pref.address?.street1 = binding.etLineOne.text.toString().trim()
+                pref.address?.street2 = binding.etLineTwo.text.toString().trim()
+                pref.address?.city = binding.etCity.text.toString().trim()
+                pref.address?.province = binding.etProvince.text.toString().trim()
+                pref.address?.postalcode = binding.etZipCode.text.toString().trim()
+                pref.address?.country = binding.etCountry.text.toString().trim()
+                pref.address?.gender = gender
+                pref.address?.firstname = binding.etFirstName.text.toString().trim()
+                pref.address?.lastname = binding.etLastName.text.toString().trim()
+                pref.address?.cuisine = cuisine
 
                 viewModel.address(builder.build())
             } else {

@@ -4,18 +4,26 @@ import android.view.View
 import com.chefio.R
 import com.chefio.databinding.ListItemCardBinding
 import com.common.base.BaseAdapter
+import com.common.data.network.model.AllCardResponseItem
 
-class PaymentAdapter : BaseAdapter<ListItemCardBinding,String>(R.layout.list_item_card) {
+class PaymentAdapter :
+    BaseAdapter<ListItemCardBinding, AllCardResponseItem>(R.layout.list_item_card) {
     override fun setClickableView(binding: ListItemCardBinding): List<View?> {
-        return emptyList()
+        return listOf(
+            binding.ivCard,
+            binding.ivDelete
+        )
     }
 
     override fun onBind(
         binding: ListItemCardBinding,
         position: Int,
-        item: String,
+        item: AllCardResponseItem,
         payloads: MutableList<Any>?
     ) {
+        binding.tvCardName.text = item.cardname
+        binding.tvCardNumber.text = item.cardnumber
 
+        binding.rbPrimary.isChecked = item.isprimary == 1
     }
 }

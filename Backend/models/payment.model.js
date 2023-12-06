@@ -1,5 +1,4 @@
 module.exports = (sequelize, Sequelize) =>{
-
     const Payment = sequelize.define("payment", {
         paymenttype: {
             type: Sequelize.STRING
@@ -21,8 +20,5 @@ module.exports = (sequelize, Sequelize) =>{
         }
 
     });
-    
-    
     return Payment;
-
 };

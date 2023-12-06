@@ -2,6 +2,7 @@ package com.common.data.prefs
 
 import android.content.Context
 import com.common.data.network.model.UserInfo
+import com.common.data.network.model.UserProfile
 import com.common.data.network.model.request.AddressReqModel
 import com.common.data.network.model.request.EditProfileReqModelItem
 import com.common.data.network.model.request.ScheduleReqModel
@@ -33,10 +34,19 @@ class SharedPref(context: Context, private val gson: Gson) : EncryptedPreference
         get() = getBoolean(this::isUser.name,false)
         set(value) = setBoolean(this::isUser.name,value)
 
+
     var schedule : ScheduleReqModel? // true = user,false = chef
         set(value) = setString(this::schedule.name, toJson(value))
         get() = try {
             fromJson(getString(this::schedule.name))
+        } catch (e: Exception) {
+            null
+        }
+
+    var userProfile : UserProfile? // true = user,false = chef
+        set(value) = setString(this::userProfile.name, toJson(value))
+        get() = try {
+            fromJson(getString(this::userProfile.name))
         } catch (e: Exception) {
             null
         }

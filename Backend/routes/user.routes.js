@@ -25,9 +25,14 @@ module.exports = function(app) {
     );
 
     app.post("/api/user/address", controller.address);
+    app.post("/api/user/addcard", controller.addcard);
+    app.post("/api/user/editcard", controller.editcard);
+    app.post("/api/user/deletecard", controller.deletecard);
     app.get(
         "/api/test/admin",
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.adminBoard
     );
+    app.get("/api/user/getuserprofile", controller.getUserProfile)
+    app.get("/api/user/getcards", controller.getcards)
 };

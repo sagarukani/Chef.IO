@@ -10,6 +10,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
+import com.chefio.BuildConfig
 import com.chefio.R
 import com.chefio.databinding.ActivityEditProfileBinding
 import com.chefio.ui.detailedRegistration.cusines.SelectCuisinesActivity
@@ -93,6 +95,9 @@ class EditProfileActivity :
         binding.etBirthDate.setOnClickListener {
             showDatePicker()
         }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         binding.spSelectCuisines.setOnClickListener {
             val intent = Intent(this, SelectCuisinesActivity::class.java)
@@ -152,6 +157,22 @@ class EditProfileActivity :
 
         // Set the DatePicker to the current date
         datePicker.init(currentYear, currentMonth, currentDay, null)
+
+        pref.address?.let {
+            binding.etFirstName.setText(it.firstname)
+            binding.etLastName.setText(it.lastname)
+            binding.etLineOne.setText(it.street1)
+            binding.etLineTwo.setText(it.street2)
+            binding.etZipCode.setText(it.postalcode)
+            binding.etCity.setText(it.city)
+            binding.etProvince.setText(it.province)
+            binding.etCountry.setText(it.country)
+            binding.etBirthDate.text = it.birthday
+        }
+
+        Glide.with(this).load((BuildConfig.PhotosUrl + pref.userProfile?.profilepicture) ?: "")
+            .placeholder(R.drawable.image)
+            .into(binding.ivProfile)
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

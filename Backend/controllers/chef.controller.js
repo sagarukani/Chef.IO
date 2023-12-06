@@ -6,22 +6,24 @@ const Config = require("../config/auth.config");
 const jwt = require('jsonwebtoken');
 const {where} = require("sequelize");
 
-exports.createschedule = (req, res) =>{
+exports.createschedule = async (req, res) => {
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
+        console.error('JWT verification error:', err.message);
         console.error('JWT')
     }
-    let chef = Chef.findOne({
+    let chef = await Chef.findOne({
         where: {userid: userID}
     });
-    Schedule.create({
+    console.log("chef data is" + chef);
+    await Schedule.create({
         chef: chef.id,
         sundayatime: req.body.sundayatime,
         mondaytime: req.body.mondaytime,
@@ -34,6 +36,7 @@ exports.createschedule = (req, res) =>{
         let schedule = await Schedule.findOne({
             where: {chefid: chef.id}
         });
+        console.log("schedule data" + schedule);
         res.send(schedule);
     });
 };
@@ -51,22 +54,23 @@ exports.getschedulebyid = async (req, res) => {
     res.send(schedule);
 }
 
-exports.scheduleUpdate = (req, res) => {
+exports.scheduleUpdate = async (req, res) => {
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
         console.error('JWT')
     }
-    let chef = Chef.findOne({
+    let chef = await Chef.findOne({
         where: {userid: userID}
     });
-    Schedule.update({
+    console.log(chef);
+    await Schedule.update({
         sundayatime: req.body.sundayatime,
         mondaytime: req.body.mondaytime,
         tuesdaytime: req.body.tuesdaytime,
@@ -80,6 +84,7 @@ exports.scheduleUpdate = (req, res) => {
         let schedule = await Schedule.findOne({
             where: {chefid: chef.id}
         });
+        console.log(schedule);
         res.send(schedule);
     })
 };
@@ -128,16 +133,23 @@ exports.getownprofile = async (req, res) => {
     });
     res.send(chef);
 }
+exports.getprofile = async (req, res) => {
+    let uname = req.body.username;
+    let chef = await User.findOne({
+        where: {username: uname}
+    });
+    res.send(chef);
+}
 exports.editchefprofile = (req, res) => {
     let token = req.headers["x-access-token"];
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
         console.error('JWT')
     }
     Chef.update({
@@ -148,7 +160,7 @@ exports.editchefprofile = (req, res) => {
         instagramlink: req.body.instagramlink,
         youtubelink: req.body.youtubelink,
         Xlink: req.body.Xlink
-    },{
+    }, {
         where: {userid: userID}
     }).then(async () => {
         let createdchef = await Chef.findOne({
@@ -164,11 +176,11 @@ exports.chefprofile = (req, res) => {
 
     let s = Config.secret;
     let userID;
-    try{
+    try {
         const decode = jwt.verify(token, s);
         // console.log(decode);
         userID = decode.id;
-    }catch (err){
+    } catch (err) {
         console.error('JWT')
     }
     Chef.create({
@@ -180,8 +192,8 @@ exports.chefprofile = (req, res) => {
         youtubelink: req.body.youtubelink,
         Xlink: req.body.Xlink,
         userid: userID
-    }).then(()=>{
-        let chef = Chef.findOne({
+    }).then(async () => {
+        let chef = await Chef.findOne({
             where: {userid: userID}
         });
         Schedule.create({
@@ -193,8 +205,8 @@ exports.chefprofile = (req, res) => {
             thursdaytime: req.body.thursdaytime,
             fridaytime: req.body.fridaytime,
             saturdaytime: req.body.saturdaytime,
-        }).then(()=>{
-            let scheule = Schedule.findOne({
+        }).then(async () => {
+            let scheule = await Schedule.findOne({
                 where: {chefid: chef.id}
             })
             Chef.update({

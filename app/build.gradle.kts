@@ -30,7 +30,8 @@ android {
         testInstrumentationRunner = AppConfig.testInstrumentationRunner
         multiDexEnabled = true
         //Change your API url here
-        buildConfigField("String", "BaseUrl", "\"https://5fd9-2607-fea8-1d65-4300-2827-4315-eb58-6b01.ngrok-free.app/api/\"")
+        buildConfigField("String", "BaseUrl", "\"https://5394-2607-fea8-1d5e-1300-1537-386f-5c0d-b159.ngrok-free.app/api/\"")
+        buildConfigField("String", "PhotosUrl", "\"https://5394-2607-fea8-1d5e-1300-1537-386f-5c0d-b159.ngrok-free.app/uploads/\"")
 
         kapt {
             arguments {

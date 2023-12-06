@@ -47,7 +47,7 @@ class App : Application() {
             }
             .build()
 
-        pref = SharedPref(this, Gson())
+        pref = SharedPref(applicationContext, Gson())
     }
 
     override fun attachBaseContext(base: Context?) {

@@ -10,7 +10,9 @@ data class AddressReqModel(
     var province: String,
     var street1: String,
     var street2: String,
-    var imagePath : String,
-    var firstname:String,
-    var lastname : String
+    var imagePath: String,
+    var firstname: String,
+    var lastname: String,
+    var cuisine: String,
+    var birthday: String = ""
 )
